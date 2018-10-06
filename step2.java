@@ -7,7 +7,7 @@ import com.pi4j.io.gpio.RaspiPin;
 import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent;
 import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 
-public class Step2 {
+public class step2 {
 
     //public static final TOGGLE_BUTTON_MODE = {'BLINKING', 'DIMMING'}
     //public static final LED_01_BLINKING_INCREASE = {'ON', 'OFF'}
