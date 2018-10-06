@@ -9,6 +9,12 @@ import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 
 public class Step2 {
 
+    //public static final TOGGLE_BUTTON_MODE = {'BLINKING', 'DIMMING'}
+    //public static final LED_01_BLINKING_INCREASE = {'ON', 'OFF'}
+    //public static final LED_01_Blinking_RATE = {2000, 1500, 1000, 500, 250}
+    //public static final LED_02_BLINKING_RATE = {2000, 1500, 1000, 500, 250}
+    //public static final LED_02_BRIGHTNESS = {'L1', 'L2'}
+
     public static void main(String args[]) throws InterruptedException {
         System.out.println("<--Step2--> GPIO Listeners Test ... started.");
 
@@ -51,6 +57,9 @@ public class Step2 {
             public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
                 // display pin state on console
                 System.out.println(" --> TOGGLE BUTTON GPIO PIN STATE CHANGE: " + event.getPin() + " = " + event.getState());
+
+                // TODO:
+                // change
             }
 
         });
