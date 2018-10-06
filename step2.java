@@ -5,7 +5,7 @@ import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 public class Step2 {
 
     public static void main(String args[]) throws InterruptedException {
-        System.out.println("<--Step2--> GPIO Listen Setup ... started.");
+        System.out.println("<--Step2--> GPIO Listeners Test ... started.");
 
         // create gpio controller
         final GpioController gpio = GpioFactory.getInstance();
