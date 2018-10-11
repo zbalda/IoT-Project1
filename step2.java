@@ -9,11 +9,19 @@ import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 
 public class step2 {
 
-    //public static final TOGGLE_BUTTON_MODE = {'BLINKING', 'DIMMING'}
-    //public static final LED_01_BLINKING_INCREASE = {'ON', 'OFF'}
-    //public static final LED_01_Blinking_RATE = {2000, 1500, 1000, 500, 250}
-    //public static final LED_02_BLINKING_RATE = {2000, 1500, 1000, 500, 250}
-    //public static final LED_02_BRIGHTNESS = {'L1', 'L2'}
+    // button and LED states
+    public static enum PRIMARY_BUTTON_MODE{BLINKING, DIMMING}
+    public static enum LED_01_BLINK_INCREASE{ON, OFF}
+    public static enum LED_01_BLINK_DELAY{2000, 1500, 1000, 500, 250}
+    public static enum LED_02_BLINK_DELAY{2000, 1500, 1000, 500, 250}
+    public static enum LED_02_BRIGHTNESS{L1, L2, L3}
+
+    // button and LED state variables
+    public static PRIMARY_BUTTON_MODE primaryButtonMode;
+    public static LED_01_BLINK_INCREASE blinkIncreaseLED1;
+    public static LED_01_BLINK_DELAY blinkDelayLED1;
+    public static LED_02_BLINK_DELAY blinkDelayLED2;
+    public static LED_02_BRIGHTNESS brightnessLED2;
 
     public static void main(String args[]) throws InterruptedException {
         System.out.println("<--Step2--> GPIO Listeners Test ... started.");
@@ -45,8 +53,24 @@ public class step2 {
         primaryButton.addListener(new GpioPinListenerDigital() {
             @Override
             public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
+                // display primary button mode on console
+                System.out.println(" --> Current PRIMARY_BUTTON_MODE: " + primaryButtonMode);
+
                 // display pin state on console
                 System.out.println(" --> PRIMARY BUTTON GPIO PIN STATE CHANGE: " + event.getPin() + " = " + event.getState());
+
+                // perform primary button action
+                switch (primaryButtonMode) {
+                  case BLINKING:
+                    // update blink increase state
+                  break;
+                  case DIMMING:
+                    // update brightness level state
+                    // call function to update brightness
+                  break;
+                  default:
+                  break;
+                }
             }
 
         });
@@ -55,11 +79,26 @@ public class step2 {
         toggleButton.addListener(new GpioPinListenerDigital() {
             @Override
             public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
+                // display primary button mode on console
+                System.out.println(" --> Current PRIMARY_BUTTON_MODE: " + primaryButtonMode);
+
                 // display pin state on console
                 System.out.println(" --> TOGGLE BUTTON GPIO PIN STATE CHANGE: " + event.getPin() + " = " + event.getState());
 
-                // TODO:
-                // change
+                // change the function of the primary button
+                switch (primaryButtonMode) {
+                  case BLINKING:
+                    primaryButtonMode = PRIMARY_BUTTON_MODE.DIMMING;
+                  break;
+                  case DIMMING:
+                    primaryButtonMode = PRIMARY_BUTTON_MODE.BLINKING;
+                  break;
+                  default:
+            			break;
+                }
+
+                // display primary button mode on console
+                System.out.println("|>| PRIMARY_BUTTON_MODE changed to: " + primaryButtonMode);
             }
 
         });
