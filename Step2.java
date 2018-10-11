@@ -10,11 +10,11 @@ import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 public class Step2 {
 
   // button and LED states
-  public static enum PRIMARY_BUTTON_MODE{BLINKING, DIMMING}
-  public static enum LED_01_BLINK_INCREASE{ON, OFF}
-  public static enum LED_02_BRIGHTNESS{L1, L2, L3}
-  public static enum LED_01_BLINK_DELAY{2000, 1500, 1000, 500, 250}
-  public static enum LED_02_BLINK_DELAY{2000, 1500, 1000, 500, 250}
+  public static final enum PRIMARY_BUTTON_MODE{BLINKING, DIMMING}
+  public static final enum LED_01_BLINK_INCREASE{ON, OFF}
+  public static final enum LED_02_BRIGHTNESS{L1, L2, L3}
+  public static final enum LED_01_BLINK_DELAY{2000, 1500, 1000, 500, 250}
+  public static final enum LED_02_BLINK_DELAY{2000, 1500, 1000, 500, 250}
 
   // button and LED state variables
   public static PRIMARY_BUTTON_MODE primaryButtonMode;
@@ -34,8 +34,11 @@ public class Step2 {
 
   public Step2() {
     InitializeGPIO();
+    System.out.println("GPIO Initialized.");
     InitializeStates();
+    System.out.println("States Initialized.");
     InitializeButtonListeners();
+    System.out.println("Button Listeners Initialized.");
   }
 
   public void InitializeGPIO() {
@@ -218,6 +221,7 @@ public class Step2 {
       }
     };
     LED1Thread.start();
+    System.out.println("LED1Thread Started.");
 
     // new thread for LED 2
     Thread LED2Thread = new Thread() {
@@ -227,6 +231,7 @@ public class Step2 {
       }
     };
     LED2Thread.start();
+    System.out.println("LED2Thread Started.");
 
     // keep program running until user aborts (CTRL-C)
     while(true) {
