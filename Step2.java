@@ -89,6 +89,7 @@ public class Step2 {
         // perform primary button action
         switch (primaryButtonMode) {
           case BLINKING:
+            // update LED 1 blinking increase state
             switch (blinkIncreaseLED1) {
               case ON:
                 blinkIncreaseLED1 = LED_01_BLINK_INCREASE.OFF;
@@ -101,8 +102,20 @@ public class Step2 {
             }
           break;
           case DIMMING:
-            // update brightness level state
-            // call function to update brightness
+            // update LED 2 brightness level state
+            switch (brightnessLED2) {
+              case L1:
+                brightnessLED2 = LED_02_BRIGHTNESS.L2;
+              break;
+              case L2:
+                brightnessLED2 = LED_02_BRIGHTNESS.L3;
+              break;
+              case L3:
+                brightnessLED2 = LED_02_BRIGHTNESS.L1;
+              break;
+              default:
+              break;
+            }
           break;
           default:
           break;
