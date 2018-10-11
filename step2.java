@@ -12,16 +12,16 @@ public class step2 {
     // button and LED states
     public static enum PRIMARY_BUTTON_MODE{BLINKING, DIMMING}
     public static enum LED_01_BLINK_INCREASE{ON, OFF}
+    public static enum LED_02_BRIGHTNESS{L1, L2, L3}
     public static enum LED_01_BLINK_DELAY{2000, 1500, 1000, 500, 250}
     public static enum LED_02_BLINK_DELAY{2000, 1500, 1000, 500, 250}
-    public static enum LED_02_BRIGHTNESS{L1, L2, L3}
 
     // button and LED state variables
     public static PRIMARY_BUTTON_MODE primaryButtonMode;
     public static LED_01_BLINK_INCREASE blinkIncreaseLED1;
+    public static LED_02_BRIGHTNESS brightnessLED2;
     public static LED_01_BLINK_DELAY blinkDelayLED1;
     public static LED_02_BLINK_DELAY blinkDelayLED2;
-    public static LED_02_BRIGHTNESS brightnessLED2;
 
     public static void main(String args[]) throws InterruptedException {
         System.out.println("<--Step2--> GPIO Listeners Test ... started.");
@@ -53,16 +53,28 @@ public class step2 {
         primaryButton.addListener(new GpioPinListenerDigital() {
             @Override
             public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
-                // display primary button mode on console
-                System.out.println(" --> Current PRIMARY_BUTTON_MODE: " + primaryButtonMode);
+                // display primary button pin state
+                System.out.println("\nPRIMARY BUTTON GPIO PIN STATE CHANGE: " + event.getPin() + " = " + event.getState());
 
-                // display pin state on console
-                System.out.println(" --> PRIMARY BUTTON GPIO PIN STATE CHANGE: " + event.getPin() + " = " + event.getState());
+                // display state variables before changes
+                System.out.println(" BEFORE:")
+                System.out.println("   --> PRIMARY_BUTTON_MODE: " + primaryButtonMode);
+                System.out.println("   --> LED_01_BLINK_INCREASE: " + blinkIncreaseLED1);
+                System.out.println("   --> LED_02_BRIGHTNESS: " + brightnessLED2);
 
                 // perform primary button action
                 switch (primaryButtonMode) {
                   case BLINKING:
-                    // update blink increase state
+                    switch (blinkIncreaseLED1) {
+                      case ON:
+                        blinkIncreaseLED1 = LED_01_BLINK_INCREASE.OFF;
+                      break;
+                      case OFF:
+                        blinkIncreaseLED1 = LED_01_BLINK_INCREASE.ON;
+                      break;
+                      default:
+                      break;
+                    }
                   break;
                   case DIMMING:
                     // update brightness level state
@@ -71,19 +83,25 @@ public class step2 {
                   default:
                   break;
                 }
-            }
 
+                // display state variables after changes
+                System.out.println(" AFTER:")
+                System.out.println("   --> PRIMARY_BUTTON_MODE: " + primaryButtonMode);
+                System.out.println("   --> LED_01_BLINK_INCREASE: " + blinkIncreaseLED1);
+                System.out.println("   --> LED_02_BRIGHTNESS: " + brightnessLED2);
+            }
         });
 
         // create and register toggle button gpio pin listener
         toggleButton.addListener(new GpioPinListenerDigital() {
             @Override
             public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
-                // display primary button mode on console
-                System.out.println(" --> Current PRIMARY_BUTTON_MODE: " + primaryButtonMode);
+                // display toggle button pin state
+                System.out.println("\nTOGGLE BUTTON GPIO PIN STATE CHANGE: " + event.getPin() + " = " + event.getState());
 
-                // display pin state on console
-                System.out.println(" --> TOGGLE BUTTON GPIO PIN STATE CHANGE: " + event.getPin() + " = " + event.getState());
+                // display primary button mode before changes
+                System.out.println(" BEFORE:")
+                System.out.println("   --> PRIMARY_BUTTON_MODE: " + primaryButtonMode);
 
                 // change the function of the primary button
                 switch (primaryButtonMode) {
@@ -97,10 +115,10 @@ public class step2 {
             			break;
                 }
 
-                // display primary button mode on console
-                System.out.println("|>| PRIMARY_BUTTON_MODE changed to: " + primaryButtonMode);
+                // display primary button mode after changes
+                System.out.println(" AFTER:")
+                System.out.println("   --> PRIMARY_BUTTON_MODE: " + primaryButtonMode);
             }
-
         });
 
         System.out.println(" ... See the listener feedback here in the console:");
