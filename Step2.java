@@ -81,7 +81,7 @@ public class Step2 {
         System.out.println("\nPRIMARY BUTTON GPIO PIN STATE CHANGE: " + event.getPin() + " = " + event.getState());
 
         // display state variables before changes
-        System.out.println(" BEFORE:")
+        System.out.println(" BEFORE:");
         System.out.println("   --> PRIMARY_BUTTON_MODE: " + primaryButtonMode);
         System.out.println("   --> LED_01_BLINK_INCREASE: " + blinkIncreaseLED1);
         System.out.println("   --> LED_02_BRIGHTNESS: " + brightnessLED2);
@@ -109,7 +109,7 @@ public class Step2 {
         }
 
         // display state variables after changes
-        System.out.println(" AFTER:")
+        System.out.println(" AFTER:");
         System.out.println("   --> PRIMARY_BUTTON_MODE: " + primaryButtonMode);
         System.out.println("   --> LED_01_BLINK_INCREASE: " + blinkIncreaseLED1);
         System.out.println("   --> LED_02_BRIGHTNESS: " + brightnessLED2);
@@ -124,7 +124,7 @@ public class Step2 {
         System.out.println("\nTOGGLE BUTTON GPIO PIN STATE CHANGE: " + event.getPin() + " = " + event.getState());
 
         // display primary button mode before changes
-        System.out.println(" BEFORE:")
+        System.out.println(" BEFORE:");
         System.out.println("   --> PRIMARY_BUTTON_MODE: " + primaryButtonMode);
 
         // change the function of the primary button
@@ -140,13 +140,13 @@ public class Step2 {
         }
 
         // display primary button mode after changes
-        System.out.println(" AFTER:")
+        System.out.println(" AFTER:");
         System.out.println("   --> PRIMARY_BUTTON_MODE: " + primaryButtonMode);
       }
     });
   }
 
-  private void LED1() {
+  private static void LED1() {
     while(true) {
       // pulse LED 1
       LED_01.pulse(400, true);
@@ -167,7 +167,7 @@ public class Step2 {
     }
   }
 
-  private void LED2() {
+  private static void LED2() {
     while(true) {
       // pulse LED 2
       switch (brightnessLED2) {
