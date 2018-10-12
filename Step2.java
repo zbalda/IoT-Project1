@@ -175,7 +175,7 @@ public class Step2 {
       // update sleep delay
       switch (blinkIncreaseLED1) {
         case ON:
-          // update blink increase
+          // TODO: update sleep delay. Every 3 ticks or so it should iterate to the next delay.
         break;
         default:
         break;
@@ -205,7 +205,7 @@ public class Step2 {
         Thread.sleep(blinkDelayLED2);
       } catch (InterruptedException ex) { }
 
-      // TODO: update sleep delay
+      // TODO: update sleep delay. Every 3 ticks or so it should iterate to the next delay.
     }
   }
 
