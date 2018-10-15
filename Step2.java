@@ -10,9 +10,9 @@ import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 public class Step2 {
 
   // button and LED states
-  public static final enum PRIMARY_BUTTON_MODE{BLINKING, DIMMING};
-  public static final enum LED_01_BLINK_INCREASE{ON, OFF};
-  public static final enum LED_02_BRIGHTNESS{L1, L2, L3};
+  public static enum PRIMARY_BUTTON_MODE{BLINKING, DIMMING};
+  public static enum LED_01_BLINK_INCREASE{ON, OFF};
+  public static enum LED_02_BRIGHTNESS{L1, L2, L3};
   public static final int[] LED_01_BLINK_DELAY = {800, 600, 400, 250, 125};
   public static final int[] LED_02_BLINK_DELAY = {800, 600, 400, 250, 125};
   public static final int LED_BLINK_COUNTER_MAX = 3;
