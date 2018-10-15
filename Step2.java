@@ -15,6 +15,7 @@ public class Step2 {
   public static final enum LED_02_BRIGHTNESS{L1, L2, L3}
   public static final int[] LED_01_BLINK_DELAY = {800, 600, 400, 250, 125}
   public static final int[] LED_02_BLINK_DELAY = {800, 600, 400, 250, 125}
+  public static final int LED_BLINK_COUNTER_MAX = 3;
 
   // button and LED state variables
   public static PRIMARY_BUTTON_MODE primaryButtonMode;
@@ -22,6 +23,8 @@ public class Step2 {
   public static LED_02_BRIGHTNESS brightnessLED2;
   public static LED_01_BLINK_DELAY blinkDelayLED1;
   public static LED_02_BLINK_DELAY blinkDelayLED2;
+  public static int blinkCounterLED1;
+  public static int blinkCounterLED2;
 
   // GPIO variables
   public static final GpioController gpio;
@@ -73,6 +76,8 @@ public class Step2 {
     brightnessLED2 = LED_02_BRIGHTNESS.L3;
     blinkDelayLED1 = LED_01_BLINK_DELAY[0];
     blinkDelayLED2 = LED_02_BLINK_DELAY[0];
+    blinkCounterLED1 = 0;
+    blinkCounterLED2 = 0;
   }
 
   public void InitializeButtonListeners() {
@@ -175,7 +180,12 @@ public class Step2 {
       // update sleep delay
       switch (blinkIncreaseLED1) {
         case ON:
-          // TODO: update sleep delay. Every 3 ticks or so it should iterate to the next delay.
+          if(blinkCounterLED1 > LED_BLINK_COUNTER_MAX){
+            blinkCounterLED1 = 0;
+          } else {
+            // TODO: update sleep delay
+            blinkCounterLED1 += 1;
+          }
         break;
         default:
         break;
@@ -205,7 +215,13 @@ public class Step2 {
         Thread.sleep(blinkDelayLED2);
       } catch (InterruptedException ex) { }
 
-      // TODO: update sleep delay. Every 3 ticks or so it should iterate to the next delay.
+      // update sleep delay
+      if(blinkCounterLED1 > LED_BLINK_COUNTER_MAX){
+        blinkCounterLED1 = 0;
+      } else {
+        // TODO: update sleep delay
+        blinkCounterLED1 += 1;
+      }
     }
   }
 
