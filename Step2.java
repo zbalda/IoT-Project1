@@ -49,8 +49,8 @@ public class Step2 {
     gpio = GpioFactory.getInstance();
 
     // provision gpio input pins with internal pull down resistors enabled
-    primaryButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_02, PinPullResistance.PULL_DOWN);
-    toggleButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_03, PinPullResistance.PULL_DOWN);
+    primaryButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_13, PinPullResistance.PULL_DOWN);
+    toggleButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_19, PinPullResistance.PULL_DOWN);
 
     // set shutdown states for button input pins
     primaryButton.setShutdownOptions(true);
