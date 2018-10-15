@@ -27,13 +27,13 @@ public class Step2 {
   public static int blinkCounterLED2;
 
   // GPIO variables
-  public static final GpioController gpio;
-  public static final GpioPinDigitalInput primaryButton;
-  public static final GpioPinDigitalInput toggleButton;
-  public static final GpioPinDigitalOutput LED_01;
-  public static final GpioPinDigitalOutput LED_02_L1;
-  public static final GpioPinDigitalOutput LED_02_L2;
-  public static final GpioPinDigitalOutput LED_02_L3;
+  public static GpioController gpio;
+  public static GpioPinDigitalInput primaryButton;
+  public static GpioPinDigitalInput toggleButton;
+  public static GpioPinDigitalOutput LED_01;
+  public static GpioPinDigitalOutput LED_02_L1;
+  public static GpioPinDigitalOutput LED_02_L2;
+  public static GpioPinDigitalOutput LED_02_L3;
 
   public Step2() {
     System.out.println("Initializing GPIO.");
