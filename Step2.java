@@ -21,8 +21,8 @@ public class Step2 {
   public static PRIMARY_BUTTON_MODE primaryButtonMode;
   public static LED_01_BLINK_INCREASE blinkIncreaseLED1;
   public static LED_02_BRIGHTNESS brightnessLED2;
-  public static LED_01_BLINK_DELAY blinkDelayLED1;
-  public static LED_02_BLINK_DELAY blinkDelayLED2;
+  public static int blinkDelayIndexLED1;
+  public static int blinkDelayIndexLED2;
   public static int blinkCounterLED1;
   public static int blinkCounterLED2;
 
@@ -74,8 +74,8 @@ public class Step2 {
     primaryButtonMode = PRIMARY_BUTTON_MODE.BLINKING;
     blinkIncreaseLED1 = LED_01_BLINK_INCREASE.ON;
     brightnessLED2 = LED_02_BRIGHTNESS.L3;
-    blinkDelayLED1 = LED_01_BLINK_DELAY[0];
-    blinkDelayLED2 = LED_02_BLINK_DELAY[0];
+    blinkDelayIndexLED1 = 0;
+    blinkDelayIndexLED2 = 0;
     blinkCounterLED1 = 0;
     blinkCounterLED2 = 0;
   }
@@ -169,32 +169,50 @@ public class Step2 {
 
   private static void LED1() {
     while(true) {
-      // pulse LED 1
-      LED_01.pulse(200, true);
-
-      // sleep
-      try {
-        Thread.sleep(blinkDelayLED1);
-      } catch (InterruptedException ex) { }
-
-      // update sleep delay
       switch (blinkIncreaseLED1) {
         case ON:
+          // update blink counter
+          blinkCounterLED1 += 1;
+
           if(blinkCounterLED1 > LED_BLINK_COUNTER_MAX){
-            blinkCounterLED1 = 0;
-          } else {
-            // TODO: update sleep delay
-            blinkCounterLED1 += 1;
+            blinkCounterLED1 = 1;
+
+            // update blink delay
+            blinkDelayIndexLED1 += 1;
+            if(blinkDelayIndexLED1 >= LED_01_BLINK_DELAY.length) {
+              blinkDelayIndexLED1 = 0;
+            }
           }
         break;
         default:
         break;
       }
+
+      // pulse LED 1
+      LED_01.pulse(200, true);
+
+      // sleep
+      try {
+        Thread.sleep(LED_01_BLINK_DELAY[blinkDelayIndexLED1]);
+      } catch (InterruptedException ex) { }
     }
   }
 
   private static void LED2() {
     while(true) {
+      // update blink counter
+      blinkCounterLED2 += 1;
+
+      if(blinkCounterLED2 > LED_BLINK_COUNTER_MAX) {
+        blinkCounterLED2 = 1;
+
+        // update blink delay
+        blinkDelayIndexLED2 += 1;
+        if(blinkDelayIndexLED2 >= LED_02_BLINK_DELAY.length) {
+          blinkDelayIndexLED2 = 0;
+        }
+      }
+
       // pulse LED 2
       switch (brightnessLED2) {
         case L1:
@@ -212,16 +230,8 @@ public class Step2 {
 
       // sleep
       try {
-        Thread.sleep(blinkDelayLED2);
+        Thread.sleep(LED_02_BLINK_DELAY[blinkDelayIndexLED2]);
       } catch (InterruptedException ex) { }
-
-      // update sleep delay
-      if(blinkCounterLED1 > LED_BLINK_COUNTER_MAX){
-        blinkCounterLED1 = 0;
-      } else {
-        // TODO: update sleep delay
-        blinkCounterLED1 += 1;
-      }
     }
   }
 
