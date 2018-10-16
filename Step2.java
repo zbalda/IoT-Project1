@@ -49,18 +49,18 @@ public class Step2 {
     gpio = GpioFactory.getInstance();
 
     // provision gpio input pins with internal pull down resistors enabled
-    primaryButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_13, PinPullResistance.PULL_DOWN);
-    toggleButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_19, PinPullResistance.PULL_DOWN);
+    primaryButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_23, PinPullResistance.PULL_DOWN);
+    toggleButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_24, PinPullResistance.PULL_DOWN);
 
     // set shutdown states for button input pins
     primaryButton.setShutdownOptions(true);
     toggleButton.setShutdownOptions(true);
 
     // provision gpio output pins and turn on
-    LED_01 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_26, "LED_01", PinState.HIGH);
-    LED_02_L1 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_16, "LED_02_L1", PinState.HIGH);
-    LED_02_L2 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_20, "LED_02_L2", PinState.LOW);
-    LED_02_L3 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_21, "LED_02_L3", PinState.LOW);
+    LED_01 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_25, "LED_01", PinState.HIGH);
+    LED_02_L1 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_29, "LED_02_L1", PinState.HIGH);
+    LED_02_L2 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_28, "LED_02_L2", PinState.LOW);
+    LED_02_L3 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_27, "LED_02_L3", PinState.LOW);
 
     // set shutdown states for LED pins
     LED_01.setShutdownOptions(true, PinState.LOW);
