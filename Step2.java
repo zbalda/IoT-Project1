@@ -6,13 +6,14 @@ import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.RaspiPin;
 import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent;
 import com.pi4j.io.gpio.event.GpioPinListenerDigital;
+import com.pi4j.util.CommandArgumentParser;
 
 public class Step2 {
 
   // button and LED states
   public static enum PRIMARY_BUTTON_MODE{BLINKING, DIMMING};
   public static enum LED_01_BLINK_INCREASE{ON, OFF};
-  public static enum LED_02_BRIGHTNESS{L1, L2, L3};
+  public static enum LED_02_BRIGHTNESS{L1, L2, L3, L4};
   public static final int[] LED_01_BLINK_DELAY = {800, 600, 400, 250, 125};
   public static final int[] LED_02_BLINK_DELAY = {800, 600, 400, 250, 125};
   public static final int LED_BLINK_COUNTER_MAX = 3;
@@ -25,15 +26,15 @@ public class Step2 {
   public static int blinkDelayIndexLED2;
   public static int blinkCounterLED1;
   public static int blinkCounterLED2;
+  public static int blinkTime;
 
   // GPIO variables
   public static GpioController gpio;
   public static GpioPinDigitalInput primaryButton;
   public static GpioPinDigitalInput toggleButton;
   public static GpioPinDigitalOutput LED_01;
-  public static GpioPinDigitalOutput LED_02_L1;
-  public static GpioPinDigitalOutput LED_02_L2;
-  public static GpioPinDigitalOutput LED_02_L3;
+  public static Pin LED2pin;
+  public static GpioPinPwmOutput LED2pwm;
 
   public Step2() {
     System.out.println("Initializing GPIO.");
@@ -50,34 +51,31 @@ public class Step2 {
 
     // provision gpio input pins with internal pull down resistors enabled
     primaryButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_23, PinPullResistance.PULL_DOWN);
-    toggleButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_24, PinPullResistance.PULL_DOWN);
+    toggleButton  = gpio.provisionDigitalInputPin(RaspiPin.GPIO_24, PinPullResistance.PULL_DOWN);
 
     // set shutdown states for button input pins
     primaryButton.setShutdownOptions(true);
-    toggleButton.setShutdownOptions(true);
+    toggleButton .setShutdownOptions(true);
 
-    // provision gpio output pins and turn on
-    LED_01 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_25, "LED_01", PinState.HIGH);
-    LED_02_L1 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_29, "LED_02_L1", PinState.HIGH);
-    LED_02_L2 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_28, "LED_02_L2", PinState.LOW);
-    LED_02_L3 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_27, "LED_02_L3", PinState.LOW);
-
-    // set shutdown states for LED pins
-    LED_01.setShutdownOptions(true, PinState.LOW);
-    LED_02_L1.setShutdownOptions(true, PinState.LOW);
-    LED_02_L2.setShutdownOptions(true, PinState.LOW);
-    LED_02_L3.setShutdownOptions(true, PinState.LOW);
+    // provision LED01 gpio output pin and set shutdown state
+    LED_01 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_25, "LED_01", PinState.LOW);
+    LED_01.setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
+    
+    // privision LED02 gpio output pin and pwm
+    LED2pin = CommandArgumentParser.getPin(RaspiPin.class, RaspiPin.GPIO_01);
+    LED2pwm = gpio.provisionPwmOutputPin(LED2pin);
   }
 
   public void InitializeStates() {
     // set initial button and LED states
     primaryButtonMode = PRIMARY_BUTTON_MODE.BLINKING;
     blinkIncreaseLED1 = LED_01_BLINK_INCREASE.ON;
-    brightnessLED2 = LED_02_BRIGHTNESS.L3;
+    brightnessLED2 = LED_02_BRIGHTNESS.L1;
     blinkDelayIndexLED1 = 0;
     blinkDelayIndexLED2 = 0;
     blinkCounterLED1 = 0;
     blinkCounterLED2 = 0;
+    blinkTime = 200;
   }
 
   public void InitializeButtonListeners() {
@@ -95,39 +93,45 @@ public class Step2 {
         System.out.println("   --> LED_02_BRIGHTNESS: " + brightnessLED2);
 
         // perform primary button action
-        switch (primaryButtonMode) {
-          case BLINKING:
-            // update LED 1 blinking increase state
-            switch (blinkIncreaseLED1) {
-              case ON:
-                blinkIncreaseLED1 = LED_01_BLINK_INCREASE.OFF;
-              break;
-              case OFF:
-                blinkIncreaseLED1 = LED_01_BLINK_INCREASE.ON;
-              break;
-              default:
-              break;
-            }
-          break;
-          case DIMMING:
-            // update LED 2 brightness level state
-            switch (brightnessLED2) {
-              case L1:
-                brightnessLED2 = LED_02_BRIGHTNESS.L2;
-              break;
-              case L2:
-                brightnessLED2 = LED_02_BRIGHTNESS.L3;
-              break;
-              case L3:
-                brightnessLED2 = LED_02_BRIGHTNESS.L1;
-              break;
-              default:
-              break;
-            }
-          break;
-          default:
-          break;
-        }
+        // only on button down
+        if(event.getState() == PinState.HIGH){
+			switch (primaryButtonMode) {
+			  case BLINKING:
+				// update LED 1 blinking increase state
+				switch (blinkIncreaseLED1) {
+				  case ON:
+					blinkIncreaseLED1 = LED_01_BLINK_INCREASE.OFF;
+				  break;
+				  case OFF:
+					blinkIncreaseLED1 = LED_01_BLINK_INCREASE.ON;
+				  break;
+				  default:
+				  break;
+				}
+			  break;
+			  case DIMMING:
+				// update LED 2 brightness level state
+				switch (brightnessLED2) {
+				  case L1:
+					brightnessLED2 = LED_02_BRIGHTNESS.L2;
+				  break;
+				  case L2:
+					brightnessLED2 = LED_02_BRIGHTNESS.L3;
+				  break;
+				  case L3:
+					brightnessLED2 = LED_02_BRIGHTNESS.L4;
+				  break;
+				  case L4:
+					brightnessLED2 = LED_02_BRIGHTNESS.L1;
+				  break;
+				  default:
+				  break;
+				}
+			  break;
+			  default:
+			  break;
+			}
+		}
 
         // display state variables after changes
         System.out.println(" AFTER:");
@@ -149,16 +153,19 @@ public class Step2 {
         System.out.println("   --> PRIMARY_BUTTON_MODE: " + primaryButtonMode);
 
         // change the function of the primary button
-        switch (primaryButtonMode) {
-          case BLINKING:
-            primaryButtonMode = PRIMARY_BUTTON_MODE.DIMMING;
-          break;
-          case DIMMING:
-            primaryButtonMode = PRIMARY_BUTTON_MODE.BLINKING;
-          break;
-          default:
-          break;
-        }
+        // only on button down
+        if(event.getState() == PinState.HIGH){
+			switch (primaryButtonMode) {
+			  case BLINKING:
+				primaryButtonMode = PRIMARY_BUTTON_MODE.DIMMING;
+			  break;
+			  case DIMMING:
+				primaryButtonMode = PRIMARY_BUTTON_MODE.BLINKING;
+			  break;
+			  default:
+			  break;
+			}
+		}
 
         // display primary button mode after changes
         System.out.println(" AFTER:");
@@ -189,12 +196,14 @@ public class Step2 {
       }
 
       // pulse LED 1
-      LED_01.pulse(200, true);
-
+      LED_01.pulse(blinkTime, true);
+      
       // sleep
       try {
         Thread.sleep(LED_01_BLINK_DELAY[blinkDelayIndexLED1]);
-      } catch (InterruptedException ex) { }
+      } catch (InterruptedException ex) {
+        System.out.println("Tried to sleep LED1 but couldn't.");
+      }
     }
   }
 
@@ -216,13 +225,40 @@ public class Step2 {
       // pulse LED 2
       switch (brightnessLED2) {
         case L1:
-          LED_02_L1.pulse(200, true);
+          LED2pwm.setPwm(50);
+          try {
+			Thread.sleep(blinkTime);
+		  } catch (InterruptedException ex) {
+			System.out.println("Tried to blink LED2 but couldn't.");
+		  }
+		  LED2pwm.setPwm(0);
         break;
         case L2:
-          LED_02_L2.pulse(200, true);
+          LED2pwm.setPwm(300);
+          try {
+			Thread.sleep(blinkTime);
+		  } catch (InterruptedException ex) {
+			System.out.println("Tried to blink LED2 but couldn't.");
+		  }
+		  LED2pwm.setPwm(0);
         break;
         case L3:
-          LED_02_L3.pulse(200, true);
+          LED2pwm.setPwm(600);
+          try {
+			Thread.sleep(blinkTime);
+		  } catch (InterruptedException ex) {
+			System.out.println("Tried to blink LED2 but couldn't.");
+		  }
+		  LED2pwm.setPwm(0);
+        break;
+        case L4:
+          LED2pwm.setPwm(1000);
+          try {
+			Thread.sleep(blinkTime);
+		  } catch (InterruptedException ex) {
+			System.out.println("Tried to blink LED2 but couldn't.");
+		  }
+		  LED2pwm.setPwm(0);
         break;
         default:
         break;
@@ -231,7 +267,9 @@ public class Step2 {
       // sleep
       try {
         Thread.sleep(LED_02_BLINK_DELAY[blinkDelayIndexLED2]);
-      } catch (InterruptedException ex) { }
+      } catch (InterruptedException ex) {
+        System.out.println("Tried to sleep LED2 but couldn't.");
+      }
     }
   }
 
