@@ -2,7 +2,7 @@
 CSCI43300 Internet of Things Project 1
 
 
-### Run command
+### How to Run
 `javac -classpath .:classes:/opt/pi4j/lib/'*' Step2.java`
 
 `sudo java -classpath .:classes:/opt/pi4j/lib/'*' Step2`
@@ -18,28 +18,53 @@ primaryButton
 
 toggleButton
 
-### Bread Board Pins
-LED_01: Pin XX
+## Step 1: Setup
 
-LED_02_L1: Pin XX
+Steps we took to setup - blink application.
 
-LED_02_L2: Pin XX
+## Step 2: Buttons and LEDs
 
-LED_02_L3: Pin XX
+#### Goal
 
-primaryButton: Pin XX
+Description of Step 2
 
-toggleButton: Pin XX
+#### Implementation
 
-### Raspberry Pi Pins
-LED_01: Pin XX
+Steps to complete Step 2
 
-LED_02_L1: Pin XX
+#### Challenges
 
-LED_02_L2: Pin XX
+Difficulties faced during implementation.
 
-LED_02_L3: Pin XX
+#### Outcome
 
-primaryButton: Pin XX
+Conclusion.
 
-toggleButton: Pin XX
+
+## Step 3: Temperature Sensor and LED
+
+#### Goal
+
+Description of Step 3
+
+
+#### Implementation
+
+Steps took to complete Step 3.
+
+#### Challenges
+
+Difficulties faced during implementation.
+
+#### Outcome
+
+Conclusion.
+
+
+## Conclusion
+
+Concluding thoughts.
+
+
+
+
