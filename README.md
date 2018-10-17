@@ -85,7 +85,7 @@ DQ - Data In/Out
 
 NC - No Connect
 
-**describe hardware setup**
+![Step3 Diagram](https://github.com/zbalda/IoT-Project1/blob/master/Step3%20Diagram.PNG)
 
 For getting the temperature from the sensor we use the Pi4J TemperatureSensor, W1Master, and TemperatureScale classes. We initialize our Gpio controller, initialize our LED pin, initialize our W1Master object for getting our temperature sensor device, and save the TemperatureSensor device we get from the W1Master. From a loop in main we repeatedly collect the temperature from our TemperatureSensor device and update the brightness of our LED based on the temperature. We use the same method to update the brightness as we did in Step 2, and we also use the same LED.
 
