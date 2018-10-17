@@ -7,6 +7,10 @@ Zachary Balda
 
 Corey Stockton
 
+## Project Goal
+
+Learn to use a single node system (Raspberry Pi) to build a simple application.
+
 
 ## Step 1: Setup
 
@@ -36,7 +40,11 @@ To test that our Pi4J library and breadboard worked we ran the [Pi4J Blink Appli
 
 #### Goal
 
-Description of Step 2
+The goal of Step 2 is to learn how to use buttons to control LEDs. For this step, we will use two LEDs, two resistors, and two buttons. 
+
+One LED should initially blink once a second. It should automatically blink faster after every few seconds. Once it reaches its fastest frequency, the LED should go back to its slowest frequency. A `primary button` should turn on/off this blink rate increase feature. That is, when the `primary button` is pressed, the blink frequency should stop increasing. When the `primary button` is pressed again, the blink frequency should start increasing again. 4 to 6 frequency levels are recommended. 
+
+The other LED should blink the same way as the first LED. This LED, however, should always have its blink frequency increasing. There is no need for an on/off blink rate increase feature. Instead, a resistor and the `primary button` should be used to control its brightness. When the `primary button` is pressed, the brightness of the LED should change. Once the max brightness is reached, the brightness should be set back to the lowest brightness. At least two levels of brightness are required.
 
 #### Implementation
 
@@ -55,8 +63,7 @@ Conclusion.
 
 #### Goal
 
-Description of Step 3
-
+The goal of Step 3 is to learn how to use the DS18B20 digital temperature sensor. For this step, our goal was to change the brightness of the LED based on its temperature readings.
 
 #### Implementation
 
