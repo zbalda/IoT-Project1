@@ -62,7 +62,7 @@ During the initial stage of wiring up the breadboard, we first took the approach
 
 #### Outcome
 
-As the final product, we had two buttons. One button would change the functionality of the second button and the second button either stopped/started the increasing blinking rate of first LED or cycling through brightness levels of the second LED. 
+Conclusion.
 
 
 ## Step 3: Temperature Sensor and LED
@@ -107,4 +107,4 @@ In the end the Step 3 application ran exactly as intended. The LED goes to half 
 
 ## Conclusion
 
-Concluding thoughts.
+By completing this project we learned how to run Java with the Pi4J library to collect input from buttons, operate LEDs and LED brightness, and how to read a temperature sensor.
