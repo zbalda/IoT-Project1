@@ -1,5 +1,5 @@
 # IoT Project 1
-CSCI 43300 
+CSCI 43300
 
 Introduction to Internet of Things
 
@@ -40,9 +40,9 @@ To test that our Pi4J library and breadboard worked we ran the [Pi4J Blink Appli
 
 #### Goal
 
-The goal of Step 2 is to learn how to use buttons to control LEDs. For this step, we will use two LEDs, two resistors, and two buttons. 
+The goal of Step 2 is to learn how to use buttons to control LEDs. For this step, we will use two LEDs, two resistors, and two buttons.
 
-One LED should initially blink once a second. It should automatically blink faster after every few seconds. Once it reaches its fastest frequency, the LED should go back to its slowest frequency. A `primary button` should turn on/off this blink rate increase feature. That is, when the `primary button` is pressed, the blink frequency should stop increasing. When the `primary button` is pressed again, the blink frequency should start increasing again. 4 to 6 frequency levels are recommended. 
+One LED should initially blink once a second. It should automatically blink faster after every few seconds. Once it reaches its fastest frequency, the LED should go back to its slowest frequency. A `primary button` should turn on/off this blink rate increase feature. That is, when the `primary button` is pressed, the blink frequency should stop increasing. When the `primary button` is pressed again, the blink frequency should start increasing again. 4 to 6 frequency levels are recommended.
 
 The other LED should blink the same way as the first LED. This LED, however, should always have its blink frequency increasing. There is no need for an on/off blink rate increase feature. Instead, a resistor and the `primary button` should be used to control its brightness. When the `primary button` is pressed, the brightness of the LED should change. Once the max brightness is reached, the brightness should be set back to the lowest brightness. At least two levels of brightness are required.
 
@@ -50,17 +50,11 @@ The above two functionalities should share one button, the `primary button`. Ano
 
 #### Implementation
 
-For our implementation, we seperated the logic of button presses, from the "state" of the system, from the LEDs. That is, we set it up such that Buttons changed state variables, and LEDs operated based on the state variables.
-
-To do this we used Pi4J Gpio Pin Listeners to listen for button presses and update our set of state variables after these presses.
-
-Each LED ran on its own thread and blinked / slept based on the state variables.
-
-...
+Steps took to complete Step 2
 
 #### Challenges
 
-During the initial stage of wiring up the breadboard, we first took the approach of using tree digital outputs with various resistors. This approach did not work because when a output pin was not pulsing, it was still grounded and pulled the current away from the diode (LED). After researching how to control the brightness of an LED with a digital output, we found it best to use the PWM method.
+During the initial stage of wiring up the breadboard, we first took the approach of using three digital outputs with various resistors. This approach did not work because when a output pin was not pulsing, it was still grounded and pulled the current away from the diode (LED). After researching how to control the brightness of an LED with a digital output, we found it best to use the PWM method.
 
 #### Outcome
 
@@ -89,9 +83,3 @@ Conclusion.
 ## Conclusion
 
 Concluding thoughts.
-
-
-
-
-
-
