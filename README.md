@@ -50,7 +50,11 @@ The above two functionalities should share one button, the `primary button`. Ano
 
 #### Implementation
 
-Steps took to complete Step 2
+For our implementation, we seperated the logic of button presses, from the "state" of the system, from the LEDs. That is, we set it up such that Buttons changed state variables, and LEDs operated based on the state variables.
+
+To do this we used Pi4J Gpio Pin Listeners to listen for button presses and update our set of state variables after these presses. Each LED ran on its own thread and blinked / slept based on the state variables.
+
+...
 
 #### Challenges
 
