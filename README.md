@@ -107,4 +107,4 @@ In the end the Step 3 application ran exactly as intended. The LED goes to half 
 
 ## Conclusion
 
-Concluding thoughts.
+By completing this project we learned how to run Java with the Pi4J library to collect input from buttons, operate LEDs and LED brightness, and how to read a temperature sensor.
