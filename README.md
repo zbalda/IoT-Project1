@@ -50,11 +50,14 @@ The above two functionalities should share one button, the `primary button`. Ano
 
 #### Implementation
 
-For our implementation, we separated the logic of button presses, from the "state" of the system, from the LEDs. That is, we set it up such that Buttons changed state variables, and LEDs operated based on the state variables.
+For our implementation, we separated the logic of button presses, from the "state" of the system, from the LEDs. That is, we set it up such that Buttons changed state variables, and LEDs operated based on the state variables. The `toggle button` switched between the two primary states: `BLINKING` or `DIMMING`.  If on `DIMMING` the `primary button` cycled through the brightness levels: `L1`, `L2`, and `L3`. If on `BLINKING` the `primary button` switched between increasing or not in blinking rate: `ON` or `OFF`.
 
-To do this we used Pi4J Gpio Pin Listeners to listen for button presses and update our set of state variables after these presses. Each LED ran on its own thread and blinked / slept based on the state variables.
+To do this we used Pi4J Gpio Pin Listeners to listen for button presses and update our set of state variables after these presses. Each LED ran on its own thread and blinked / slept based on the state variables. Since the listeners were triggered on both button press and button release, we had to set up the method to only change states on button down or `HIGH` and ignore the button up or `LOW`.
 
-...
+Wiring the breadboard was straightforward. We reserved two inputs for the buttons and two outputs for the LEDs. Originally, we were going to use three outputs, but researched a better/possible way(see Challenges). The buttons were a standard `HIGH`/`LOW` input. The first LED was a simple `HIGH`/`LOW` input. The second LED, on the other hand, was more difficult. We had to use the PWM(pulse width modulation) approach to get the different brightness levels. This is like a flickering signal to simulate an analog output.
+
+After getting everything all wired up, the breadboard liked something like this:
+![Step2_Diagram](Step2 Diagram.png)
 
 #### Challenges
 
