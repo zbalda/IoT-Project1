@@ -1,5 +1,7 @@
 # IoT Project 1
-CSCI43300 Introduction to Internet of Things
+CSCI 43300 
+
+Introduction to Internet of Things
 
 Zachary Balda
 
