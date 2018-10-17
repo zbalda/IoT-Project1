@@ -57,7 +57,8 @@ To do this we used Pi4J Gpio Pin Listeners to listen for button presses and upda
 Wiring the breadboard was straightforward. We reserved two inputs for the buttons and two outputs for the LEDs. Originally, we were going to use three outputs, but researched a better/possible way(see Challenges). The buttons were a standard `HIGH`/`LOW` input. The first LED was a simple `HIGH`/`LOW` input. The second LED, on the other hand, was more difficult. We had to use the PWM(pulse width modulation) approach to get the different brightness levels. This is like a flickering signal to simulate an analog output.
 
 After getting everything all wired up, the breadboard liked something like this:
-![Step2_Diagram](Step2 Diagram.png)
+
+![Step2_Diagram](/Step2 Diagram.png)
 
 #### Challenges
 
