@@ -61,7 +61,7 @@ public class Step2 {
     LED_01 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_25, "LED_01", PinState.LOW);
     LED_01.setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
     
-    // privision LED02 gpio output pin and pwm
+    // provision LED02 gpio output pin and pwm
     LED2pin = CommandArgumentParser.getPin(RaspiPin.class, RaspiPin.GPIO_01);
     LED2pwm = gpio.provisionPwmOutputPin(LED2pin);
   }
