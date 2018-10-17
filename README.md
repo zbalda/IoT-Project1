@@ -50,19 +50,19 @@ The above two functionalities should share one button, the `primary button`. Ano
 
 #### Implementation
 
-For our implementation, we separated the logic of button presses, from the "state" of the system, from the LEDs. That is, we set it up such that Buttons changed state variables, and LEDs operated based on the state variables. The `toggle button` switched between the two primary states: `BLINKING` or `DIMMING`.  If on `DIMMING` the `primary button` cycled through the brightness levels: `L1`, `L2`, and `L3`. If on `BLINKING` the `primary button` switched between increasing or not in blinking rate: `ON` or `OFF`.
+For our implementation, we separated the logic of button presses, from the "state" of the system, from the LEDs. That is, we set it up such that Buttons change state variables and LEDs operate based on the state variables. The `toggle button` switches between the two primary states: `BLINKING` or `DIMMING`.  If on `DIMMING`, the `primary button` cycles through the brightness levels: `L1`, `L2`, and `L3`. If on `BLINKING`, the `primary button` switches between increasing or not increasing in blinking rate: `ON` or `OFF`.
 
-To do this we used Pi4J Gpio Pin Listeners to listen for button presses and update our set of state variables after these presses. Each LED ran on its own thread and blinked / slept based on the state variables. Since the listeners were triggered on both button press and button release, we had to set up the method to only change states on button down or `HIGH` and ignore the button up or `LOW`.
+To do this we use Pi4J Gpio Pin Listeners to listen for button presses and update our set of state variables after these presses. Each LED is run on its own thread and blinks / sleeps based on the state variables. Since the listeners were triggered on both button press and button release, we had to set up the method to only change states on button down or `HIGH` and ignore the button up or `LOW`.
 
-Wiring the breadboard was straightforward. We reserved two inputs for the buttons and two outputs for the LEDs. Originally, we were going to use three outputs, but researched a better/possible way(see Challenges). The buttons were a standard `HIGH`/`LOW` input. The first LED was a simple `HIGH`/`LOW` input. The second LED, on the other hand, was more difficult. We had to use the PWM(pulse width modulation) approach to get the different brightness levels. This is like a flickering signal to simulate an analog output.
+Wiring the breadboard was straightforward. We reserved two inputs for the buttons and two outputs for the LEDs. Originally, we were going to use three outputs, but researched a better/possible way (see Challenges). The buttons were a standard `HIGH`/`LOW` input. The first LED was a simple `HIGH`/`LOW` output. The second LED, on the other hand, was more difficult. We had to use the PWM (pulse width modulation) approach to get the different brightness levels. This is like a flickering signal to simulate an analog output.
 
-After getting everything all wired up, the breadboard liked something like this:
+After getting everything all wired up, the breadboard looked something like this:
 
 ![Step2 Diagram](https://github.com/zbalda/IoT-Project1/blob/master/Step2%20Diagram.PNG)
 
 #### Challenges
 
-During the initial stage of wiring up the breadboard, we first took the approach of using three digital outputs with various resistors. This approach did not work because when a output pin was not pulsing, it was still grounded and pulled the current away from the diode (LED). After researching how to control the brightness of an LED with a digital output, we found it best to use the PWM(pulse width modulation) method. This fixed our problem because instead of trying to use three outputs, we only need to use one output.
+During the initial stage of wiring up the breadboard, we first took the approach of using three digital outputs with various resistors for the dimming LED. This approach did not work because when an output pin was not pulsing, it was still grounded and pulled the current away from the diode (LED). After researching how to control the brightness of an LED with a digital output, we found it best to use the PWM (pulse width modulation) method. This fixed our problem because instead of trying to use three outputs, we only need to use one output.
 
 #### Outcome
 
@@ -111,4 +111,4 @@ In the end the Step 3 application ran exactly as intended. The LED goes to half 
 
 ## Conclusion
 
-By completing this project we learned how to run Java with the Pi4J library to collect input from buttons, operate LEDs and LED brightness, and how to read a temperature sensor.
+By completing this project we learned how to run Java with the Pi4J library to collect input from buttons, operate LEDs and LED brightness, and read a temperature sensor. This project gave us a good understanding of using a Raspberry Pi, sensors, and actuators to build a simple application.
