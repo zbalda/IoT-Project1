@@ -60,7 +60,7 @@ Each LED ran on its own thread and blinked / slept based on the state variables.
 
 #### Challenges
 
-Difficulties faced during implementation.
+During the initial stage of wiring up the breadboard, we first took the approach of using tree digital outputs with various resistors. This approach did not work because when a output pin was not pulsing, it was still grounded and pulled the current away from the diode (LED). After researching how to control the brightness of an LED with a digital output, we found it best to use the PWM method.
 
 #### Outcome
 
