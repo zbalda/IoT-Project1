@@ -58,11 +58,11 @@ To do this we used Pi4J Gpio Pin Listeners to listen for button presses and upda
 
 #### Challenges
 
-During the initial stage of wiring up the breadboard, we first took the approach of using three digital outputs with various resistors. This approach did not work because when a output pin was not pulsing, it was still grounded and pulled the current away from the diode (LED). After researching how to control the brightness of an LED with a digital output, we found it best to use the PWM method.
+During the initial stage of wiring up the breadboard, we first took the approach of using three digital outputs with various resistors. This approach did not work because when a output pin was not pulsing, it was still grounded and pulled the current away from the diode (LED). After researching how to control the brightness of an LED with a digital output, we found it best to use the PWM(pulse width modulation) method. This fixed our problem because instead of trying to use three outputs, we only need to use one output.
 
 #### Outcome
 
-As the final product, we had two buttons. One button would change the functionality of the second button and the second button either stopped/started the increasing blinking rate of first LED or cycling through brightness levels of the second LED. 
+As the final product, the node run as intended. One button would change the functionality of the second button and the second button either stopped/started the increasing blinking rate of first LED or cycling through brightness levels of the second LED.
 
 
 ## Step 3: Temperature Sensor and LED
