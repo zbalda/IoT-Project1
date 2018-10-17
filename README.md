@@ -50,7 +50,11 @@ The above two functionalities should share one button, the `primary button`. Ano
 
 #### Implementation
 
-Steps took to complete Step 2
+For our implementation, we seperated the logic of button presses, from the "state" of the system, from the LEDs. That is, we set it up such that Buttons changed state variables, and LEDs operated based on the state variables.
+
+To do this we used Pi4J Gpio Pin Listeners to listen for button presses and update our set of state variables after these presses. Each LED ran on its own thread and blinked / slept based on the state variables.
+
+...
 
 #### Challenges
 
@@ -94,12 +98,11 @@ pwm = 50 * Temperature Celsius - 750
 pwm values are "capped" between 0 and 1000. That is, a calculated pwm of -50 would be set to 0 and a calculated pwm of 1050 would be set to 1000.
 
 #### Challenges
-
-Difficulties faced during implementation.
+Figuring out how to read from the temperature sensor was the most difficult part of this step. Once we figured out how to use the Pi4J TemperatureSensor and W1Master classes we were able to successfully get temperature readings from the sensor. We then used what we learned about LED brightness from Step 2 to change the brightness of the LED based on the temperature.
 
 #### Outcome
 
-Conclusion.
+In the end the Step 3 application ran exactly as intended. The LED goes to half brightness at room temperature (25°C), is completely off at 10 degrees celsius below room temperature (15°C), and is at full brightness 10 degrees above room temperature (35°C).
 
 
 ## Conclusion
