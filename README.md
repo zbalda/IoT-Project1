@@ -1,26 +1,28 @@
-# IoT-Project1
-CSCI43300 Internet of Things Project 1
+# IoT Project 1
+CSCI43300 Introduction to Internet of Things
+Zachary Balda
+Corey Stockton
 
 
-### How to Run
-`javac -classpath .:classes:/opt/pi4j/lib/'*' Step2.java`
+# Step 1: Setup
 
-`sudo java -classpath .:classes:/opt/pi4j/lib/'*' Step2`
+For our implementation we used Java with the Pi4J library.
 
+#### How to Install Pi4J
 
-### LEDs
-LED_01: Red, Blinking
+`apt install pi4j`
 
-LED_02: Green, Dimming
+#### How to Run with Pi4J
+`javac -classpath .:classes:/opt/pi4j/lib/'*' StepX.java`
 
-### Buttons
-primaryButton
+`sudo java -classpath .:classes:/opt/pi4j/lib/'*' StepX`
 
-toggleButton
+#### Challenges
 
-## Step 1: Setup
+After installing Pi4J we encountered a conflict between the Pi4J library and our Raspberry Pi kernel version. We resolved this issue by installing a Pi4J snapshot that did not conflict with our kernel version:
 
-Steps we took to setup - blink application.
+`sudo dpkg -i pi4j-1.2-SNAPSHOT.deb`
+
 
 ## Step 2: Buttons and LEDs
 
@@ -30,7 +32,7 @@ Description of Step 2
 
 #### Implementation
 
-Steps to complete Step 2
+Steps took to complete Step 2
 
 #### Challenges
 
@@ -41,7 +43,7 @@ Difficulties faced during implementation.
 Conclusion.
 
 
-## Step 3: Temperature Sensor and LED
+# Step 3: Temperature Sensor and LED
 
 #### Goal
 
@@ -64,6 +66,8 @@ Conclusion.
 ## Conclusion
 
 Concluding thoughts.
+
+
 
 
 
