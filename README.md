@@ -1,45 +1,82 @@
-# IoT-Project1
-CSCI43300 Internet of Things Project 1
+# IoT Project 1
+CSCI 43300 
+
+Introduction to Internet of Things
+
+Zachary Balda
+
+Corey Stockton
 
 
-### Run command
-`javac -classpath .:classes:/opt/pi4j/lib/'*' Step2.java`
+## Step 1: Setup
 
-`sudo java -classpath .:classes:/opt/pi4j/lib/'*' Step2`
+For our implementation we used **Java** with the **Pi4J library**.
+
+#### How to Install Pi4J
+
+`apt install pi4j`
+
+#### How to Run with Pi4J
+`javac -classpath .:classes:/opt/pi4j/lib/'*' StepX.java`
+
+`sudo java -classpath .:classes:/opt/pi4j/lib/'*' StepX`
+
+#### Challenges Running with Pi4J
+
+After installing Pi4J we encountered a conflict between the Pi4J library and our Raspberry Pi kernel version. We resolved this issue by installing a Pi4J snapshot that did not conflict with our kernel version:
+
+`sudo dpkg -i pi4j-1.2-SNAPSHOT.deb`
+
+#### Running the Blink Application
+
+To test that our Pi4J library and breadboard worked we ran the [Pi4J Blink Application](http://pi4j.com/example/control.html) with an LED connected to GPIO_01. The application ran as designed so we moved on to step 2.
 
 
-### LEDs
-LED_01: Red, Blinking
+## Step 2: Buttons and LEDs
 
-LED_02: Green, Dimming
+#### Goal
 
-### Buttons
-primaryButton
+Description of Step 2
 
-toggleButton
+#### Implementation
 
-### Bread Board Pins
-LED_01: Pin XX
+Steps took to complete Step 2
 
-LED_02_L1: Pin XX
+#### Challenges
 
-LED_02_L2: Pin XX
+Difficulties faced during implementation.
 
-LED_02_L3: Pin XX
+#### Outcome
 
-primaryButton: Pin XX
+Conclusion.
 
-toggleButton: Pin XX
 
-### Raspberry Pi Pins
-LED_01: Pin XX
+## Step 3: Temperature Sensor and LED
 
-LED_02_L1: Pin XX
+#### Goal
 
-LED_02_L2: Pin XX
+Description of Step 3
 
-LED_02_L3: Pin XX
 
-primaryButton: Pin XX
+#### Implementation
 
-toggleButton: Pin XX
+Steps took to complete Step 3.
+
+#### Challenges
+
+Difficulties faced during implementation.
+
+#### Outcome
+
+Conclusion.
+
+
+## Conclusion
+
+Concluding thoughts.
+
+
+
+
+
+
