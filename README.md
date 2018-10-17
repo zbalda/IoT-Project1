@@ -1,6 +1,8 @@
 # IoT Project 1
 CSCI43300 Introduction to Internet of Things
+
 Zachary Balda
+
 Corey Stockton
 
 
@@ -24,7 +26,7 @@ After installing Pi4J we encountered a conflict between the Pi4J library and our
 `sudo dpkg -i pi4j-1.2-SNAPSHOT.deb`
 
 
-## Step 2: Buttons and LEDs
+# Step 2: Buttons and LEDs
 
 #### Goal
 
