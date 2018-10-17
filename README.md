@@ -69,7 +69,29 @@ The goal of Step 3 is to learn how to use the DS18B20 digital temperature sensor
 
 #### Implementation
 
-Steps took to complete Step 3.
+The [DS18B20](https://datasheets.maximintegrated.com/en/ds/DS18B20-PAR.pdf) has three pins and a unique one-wire interface. The pins are:
+
+GND - Ground
+
+DQ - Data In/Out
+
+NC - No Connect
+
+**describe hardware setup**
+
+For getting the temperature from the sensor we use the Pi4J TemperatureSensor, W1Master, and TemperatureScale classes. We initialize our Gpio controller, initialize our LED pin, initialize our W1Master object for getting our temperature sensor device, and save the TemperatureSensor device we get from the W1Master. From a loop in main we repeatedly collect the temperature from our TemperatureSensor device and update the brightness of our LED based on the temperature. We use the same method to update the brightness as we did in Step 2, and we also use the same LED.
+
+The equation we use for setting the pwm brightness of our LED  based on the temperature is:
+
+pwm = 50 * Temperature Celsius - 750
+
+  15°C => 0pwm
+
+  25°C => 500pwm (room temperature => half brightness)
+
+  35°C => 1000pwm
+
+pwm values are "capped" between 0 and 1000. That is, a calculated pwm of -50 would be set to 0 and a calculated pwm of 1050 would be set to 1000.
 
 #### Challenges
 
