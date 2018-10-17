@@ -58,7 +58,7 @@ Wiring the breadboard was straightforward. We reserved two inputs for the button
 
 After getting everything all wired up, the breadboard liked something like this:
 
-![Step2_Diagram](/Step2 Diagram.png)
+![Step2 Diagram](https://github.com/zbalda/IoT-Project1/blob/master/Step2%20Diagram.PNG)
 
 #### Challenges
 
